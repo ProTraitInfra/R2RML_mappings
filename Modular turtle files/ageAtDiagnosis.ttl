@@ -51,4 +51,13 @@ map:patient rr:predicateObjectMap [
             ];
         ];
     ].
+
+###########################################
+# select 
+# ?GEN_AGE 
+# Age
+#    ?Patient rdf:type ncit:C16960;
+#     	roo:P100016 ?age.
+#    ?age roo:P100042 ?GEN_AGE.
+###########################################    
     
