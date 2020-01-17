@@ -34,3 +34,14 @@ map:patient rr:predicateObjectMap [
             ];
         ];
     ].
+
+###########################################
+# select 
+# ?GEN_RELATION
+# where {
+    #relationship status
+    # ?Patient rdf:type ncit:C16960;
+    #     roo:has_relationship_status ?relationship.  
+    # ?relationship roo:local_value ?GEN_RELATION.
+# }
+########################################### 

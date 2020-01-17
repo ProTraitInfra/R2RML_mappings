@@ -34,3 +34,14 @@ map:patient rr:predicateObjectMap [
             ];
         ];
     ].
+
+###########################################
+# select 
+# ?GEN_YEAR_BIRTH
+# where {
+    #Birthyear
+    # ?Patient rdf:type ncit:C16960;
+    #  	roo:is_born ?bYear.
+    # ?bYear roo:P100027 ?GEN_YEAR_BIRTH.   
+# }
+########################################### 

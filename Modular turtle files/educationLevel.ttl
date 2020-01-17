@@ -34,3 +34,14 @@ map:patient rr:predicateObjectMap [
             ];
         ];
     ].
+
+###########################################
+# select 
+# ?GEN_EDUCATION
+# where {
+    #educational level
+    # ?Patient rdf:type ncit:C16960;
+    # 	roo:has_education_level ?educ.
+    # ?educ roo:local_value ?GEN_EDUCATION.   
+# }
+########################################### 

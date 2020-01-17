@@ -34,3 +34,14 @@ map:patient rr:predicateObjectMap [
             ];
         ];
     ].
+
+###########################################
+# select 
+# ?GEN_GENDER
+# where {
+    #biological sex
+    # ?Patient rdf:type ncit:C16960;
+    #     roo:P100018 ?sex.  
+    # ?sex roo:P100042 ?GEN_GENDER.
+# }
+########################################### 

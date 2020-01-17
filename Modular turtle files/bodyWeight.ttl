@@ -51,3 +51,14 @@ map:patient rr:predicateObjectMap [
             ];
         ];
     ].
+
+###########################################
+# select 
+# ?GEN_WEIGHT
+# where {
+    #weight
+    # ?Patient rdf:type ncit:C16960;
+    #  	roo:P100249 ?weight.
+    # ?weight roo:P100042 ?GEN_WEIGHT.  
+# }
+########################################### 

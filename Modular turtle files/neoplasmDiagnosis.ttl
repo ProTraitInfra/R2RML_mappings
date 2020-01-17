@@ -102,3 +102,20 @@ map:patient rr:predicateObjectMap [
         ];
     ].
     
+###########################################
+# select 
+# ?GEN_DATE_DIAGN
+# ?GEN_TUMOURSITE
+# ?GEN_RT_TREATMENT
+# where {
+    #neoplasm diagnosis
+    # ?Patient rdf:type ncit:C16960;
+    # 	roo:P100020 ?neoplasm.
+    # ?neoplasm roo:P100251 ?dateOfDiag. 
+    # ?dateOfDiag roo:P100042 ?GEN_DATE_DIAGN.
+    # ?neoplasm roo:P100202 ?location.
+    # ?location roo:local_value ?GEN_TUMOURSITE.
+    # ?neoplasm roo:P100403 ?treatmentTech.
+    # ?treatmentTech roo:local_value ?GEN_RT_TREATMENT.
+# }
+########################################### 

@@ -152,3 +152,24 @@ map:patient rr:predicateObjectMap [
             ];
         ];
     ].
+
+###########################################
+# select 
+# ?GEN_SMOKING
+# ?GEN_SM_PACKYEARS
+# ?GEN_SM_STOPMONTHS
+# where {
+    #smoking status
+    # ?Patient rdf:type ncit:C16960;
+    #     roo:P100306 ?smokingStatus.  
+    # ?smokingStatus roo:local_value ?GEN_SMOKING.
+    # ?smokingStatus roo:P100306 ?former.
+    # ?former rdf:type ncit:C67148;
+    # 	roo:P100042 ?GEN_SM_PACKYEARS;
+    # 	roo:has_time_period ?timeStopped.
+    # ?timeStopped roo:local_value ?GEN_SM_STOPMONTHS.    
+    # ?smokingStatus roo:P100306 ?current. 
+    # ?current rdf:type ncit:C67147;
+    #        roo:P100042 ?GEN_SM_PACKYEARS.
+# }
+########################################### 

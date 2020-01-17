@@ -176,3 +176,30 @@ map:patient rr:predicateObjectMap [
             ];
         ];
     ].
+
+###########################################
+# select 
+# ?GEN_PLAN_COMPARISON		
+# ?GEN_PLAN_COMP_DATE
+# ?GEN_PLAN_COMP_VERSION
+# ?GEN_COMP_OUTCOME
+# ?GEN_DEC_PROTONS
+# ?GEN_REASON_PROTONS
+# where {
+    #planning comparison
+    # ?Patient rdf:type ncit:C16960;
+    # 	roo:P100024 ?radiotherapy.
+    # ?radiotherapy roo:has_planning_comparison ?planningComparison.
+    # ?planningComparison roo:P100042 ?GEN_PLAN_COMPARISON.
+    # ?planningComparison roo:P100228 ?planDate.
+    # ?planDate roo:P100042 ?GEN_PLAN_COMP_DATE.
+    # ?planningComparison roo:has_version ?planVersion.
+    # ?planVersion roo:P100042 ?GEN_PLAN_COMP_VERSION.
+    # ?planningComparison roo:has_outcome ?planOutcome.
+    # ?planOutcome roo:local_value ?GEN_COMP_OUTCOME.
+    # ?planningComparison roo:P100397 ?protonTherapy.
+    # ?protonTherapy roo:P100042 ?GEN_DEC_PROTONS.
+    # ?planningComparison roo:has_declination_reason ?reasonNoProton.
+    # ?reasonNoProton roo:local_value ?GEN_REASON_PROTONS.
+# }
+########################################### 

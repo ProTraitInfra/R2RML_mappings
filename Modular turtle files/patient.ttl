@@ -43,3 +43,14 @@ map:patient rr:predicateObjectMap [
             ];
         ];
     ].
+
+###########################################
+# select 
+# ?GEN_IDNUMBER 
+# where {
+    #patient ID
+    # ?Patient rdf:type ncit:C16960;
+    # 	roo:P100061 ?id.
+    # ?id roo:P100042 ?GEN_IDNUMBER.
+# }
+########################################### 

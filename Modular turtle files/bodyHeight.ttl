@@ -51,3 +51,14 @@ map:patient rr:predicateObjectMap [
             ];
         ];
     ].
+
+###########################################
+# select 
+# ?GEN_HEIGHT
+# where {
+    #height
+    # ?Patient rdf:type ncit:C16960;
+    #  	roo:P100248 ?height.
+    # ?height roo:P100042 ?GEN_HEIGHT.   
+# }
+########################################### 

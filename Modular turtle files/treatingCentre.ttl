@@ -83,3 +83,20 @@ map:patient rr:predicateObjectMap [
             ];
         ];
     ].
+
+###########################################
+# select 
+# ?GEN_TREAT_CENTRE
+# ?GEN_DATE_REGISTR
+# ?GEN_REFER_CENTRE
+# where {
+    #treating centre
+    # ?Patient rdf:type ncit:C16960;
+    #  	roo:P100039 ?treatCentre.
+    # ?treatCentre roo:local_value ?GEN_TREAT_CENTRE.
+    # ?treatCentre roo:has_registration_date ?regDate.
+    # ?regDate roo:P100042 ?GEN_DATE_REGISTR.
+    # ?treatCentre roo:referred_by ?refCentre.
+    # ?refCentre roo:P100042 ?GEN_REFER_CENTRE.
+# }
+########################################### 

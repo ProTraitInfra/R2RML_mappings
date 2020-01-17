@@ -134,3 +134,27 @@ map:neoplasm rr:predicateObjectMap [
             ];
         ];
     ].
+
+###########################################
+# select 
+# ?GEN_OTHERCANCER
+# ?GEN_OTH_C_SITE
+# ?GEN_OTH_C_DATE
+# ?GEN_OTH_C_RT
+# ?GEN_OTH_C_RT_REIRR
+# where {
+    # OPTIONAL{
+    # ?Patient rdf:type ncit:C16960;
+    #     roo:P100020 ?neoplasm.     
+    # ?neoplasm roo:has_previousNeoplasm ?previousNeoplasm.
+    # ?previousNeoplasm roo:P100042 ?GEN_OTHERCANCER.
+    # ?previousNeoplasm roo:P100202 ?prevLocation.
+    # ?prevLocation roo:P100042 ?GEN_OTH_C_SITE.
+    # ?previousNeoplasm roo:P100251 ?neoplasmDate.
+    # ?neoplasmDate roo:P100042 ?GEN_OTH_C_DATE.
+	# ?previousNeoplasm roo:has_previousRT ?prevRadiotherapy.
+    # ?prevRadiotherapy roo:local_value ?GEN_OTH_C_RT.
+    # ?previousNeoplasm roo:has_subtype ?reirradiation.
+    # ?reirradiation roo:local_value ?GEN_OTH_C_RT_REIRR.
+# }
+########################################### 
