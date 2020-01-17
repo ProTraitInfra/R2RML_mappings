@@ -84,3 +84,21 @@ map:patient rr:predicateObjectMap [
             ];
         ];
     ].
+
+###########################################
+# select 
+# ?GEN_ALCOHOL 
+# ?GEN_ALCOHOL_GLASS 
+# ?GEN_ALCOHOL_DAYS
+# where {
+#     ?Patient rdf:type ncit:C16960;
+#      	roo:P100022 ?alcUseHist.
+#     ?alcUseHist roo:local_value ?GEN_ALCOHOL.
+#     ?alcUseHist roo:P100423 ?alcGlass.
+#     ?alcUseHist roo:P100423 ?alcDays.
+#     ?alcGlass rdf:type roo:numberOfGlasses;
+#         roo:P100042 ?GEN_ALCOHOL_GLASS.
+#     ?alcDays rdf:type roo:daysWithMoreThan1Glass;
+#         roo:P100042 ?GEN_ALCOHOL_DAYS.
+# }
+########################################### 
