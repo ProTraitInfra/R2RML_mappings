@@ -1,0 +1,219 @@
+
+select
+?GEN_AGE 
+where {
+   #Age
+   ?Patient rdf:type ncit:C16960;
+    	roo:P100016 ?age.
+   ?ageAtDiagnosis roo:P100042 ?GEN_AGE.
+}
+##########################################   
+    
+select
+?GEN_ALCOHOL 
+?GEN_ALCOHOL_GLASS 
+?GEN_ALCOHOL_DAYS
+where {
+    ?Patient rdf:type ncit:C16960;
+     	roo:P100022 ?alcUseHist.
+    ?alcUseHist roo:local_value ?GEN_ALCOHOL.
+    ?alcUseHist roo:P100423 ?alcGlass.
+    ?alcUseHist roo:P100423 ?alcDays.
+    ?alcGlass rdf:type roo:numberOfGlasses;
+        roo:P100042 ?GEN_ALCOHOL_GLASS.
+    ?alcDays rdf:type roo:daysWithMoreThan1Glass;
+        roo:P100042 ?GEN_ALCOHOL_DAYS.
+}
+##########################################
+
+select 
+?GEN_YEAR_BIRTH
+where {
+    #Birthyear
+    ?Patient rdf:type ncit:C16960;
+     	roo:is_born ?bYear.
+    ?bYear roo:P100027 ?GEN_YEAR_BIRTH.   
+}
+##########################################
+
+select 
+?GEN_HEIGHT
+where {
+    #height
+    ?Patient rdf:type ncit:C16960;
+     	roo:P100248 ?height.
+    ?height roo:P100042 ?GEN_HEIGHT.   
+}
+##########################################
+
+select 
+?GEN_WEIGHT
+where {
+    #weight
+    ?Patient rdf:type ncit:C16960;
+     	roo:P100249 ?weight.
+    ?weight roo:P100042 ?GEN_WEIGHT.  
+}
+##########################################
+
+select
+NULL 
+where {
+   #charlsonComorbidityIndex
+   ?Patient rdf:type ncit:C16960;
+    	roo:P100022 ?charlsonComorbidityIndex.
+   ?age roo:local_value ?GEN_CHARL.
+}
+##########################################   
+
+select
+NULL 
+where {
+   #comorbidity
+   ?Patient rdf:type ncit:C16960;
+    	roo:P100255 ?comorbidity.
+   ?comorbidity roo:local_value ?GEN_COMORB.
+}
+##########################################   
+
+select 
+?GEN_EDUCATION
+where {
+    #educational level
+    ?Patient rdf:type ncit:C16960;
+    	roo:has_education_level ?educ.
+    ?educ roo:local_value ?GEN_EDUCATION.   
+}
+##########################################
+
+select 
+?GEN_DATE_DIAGN
+?GEN_TUMOURSITE
+?GEN_RT_TREATMENT
+where {
+    #neoplasm diagnosis
+    ?Patient rdf:type ncit:C16960;
+    	roo:P100020 ?neoplasm.
+    ?neoplasm roo:P100251 ?dateOfDiag. 
+    ?dateOfDiag roo:P100042 ?GEN_DATE_DIAGN.
+    ?neoplasm roo:P100202 ?location.
+    ?location roo:local_value ?GEN_TUMOURSITE.
+    ?neoplasm roo:P100403 ?treatmentTech.
+    ?treatmentTech roo:local_value ?GEN_RT_TREATMENT.
+}
+##########################################
+
+select 
+?GEN_IDNUMBER 
+where {
+    #patient ID
+    ?Patient rdf:type ncit:C16960;
+    	roo:P100061 ?id.
+    ?id roo:P100042 ?GEN_IDNUMBER.
+}
+##########################################
+
+select 
+?GEN_PLAN_COMPARISON		
+?GEN_PLAN_COMP_DATE
+?GEN_PLAN_COMP_VERSION
+?GEN_COMP_OUTCOME
+?GEN_DEC_PROTONS
+?GEN_REASON_PROTONS
+where {
+    #planning comparison
+    ?Patient rdf:type ncit:C16960;
+    	roo:P100024 ?radiotherapy.
+    ?radiotherapy roo:has_planning_comparison ?planningComparison.
+    ?planningComparison roo:P100042 ?GEN_PLAN_COMPARISON.
+    ?planningComparison roo:P100228 ?planDate.
+    ?planDate roo:P100042 ?GEN_PLAN_COMP_DATE.
+    ?planningComparison roo:has_version ?planVersion.
+    ?planVersion roo:P100042 ?GEN_PLAN_COMP_VERSION.
+    ?planningComparison roo:has_outcome ?planOutcome.
+    ?planOutcome roo:local_value ?GEN_COMP_OUTCOME.
+    ?planningComparison roo:P100397 ?protonTherapy.
+    ?protonTherapy roo:P100042 ?GEN_DEC_PROTONS.
+    ?planningComparison roo:has_declination_reason ?reasonNoProton.
+    ?reasonNoProton roo:local_value ?GEN_REASON_PROTONS.
+}
+##########################################
+
+select 
+?GEN_OTHERCANCER
+?GEN_OTH_C_SITE
+?GEN_OTH_C_DATE
+?GEN_OTH_C_RT
+?GEN_OTH_C_RT_REIRR
+where {
+    OPTIONAL{
+    ?Patient rdf:type ncit:C16960;
+        roo:P100020 ?neoplasm.     
+    ?neoplasm roo:has_previousNeoplasm ?previousNeoplasm.
+    ?previousNeoplasm roo:P100042 ?GEN_OTHERCANCER.
+    ?previousNeoplasm roo:P100202 ?prevLocation.
+    ?prevLocation roo:P100042 ?GEN_OTH_C_SITE.
+    ?previousNeoplasm roo:P100251 ?neoplasmDate.
+    ?neoplasmDate roo:P100042 ?GEN_OTH_C_DATE.
+	?previousNeoplasm roo:has_previousRT ?prevRadiotherapy.
+    ?prevRadiotherapy roo:local_value ?GEN_OTH_C_RT.
+    ?previousNeoplasm roo:has_subtype ?reirradiation.
+    ?reirradiation roo:local_value ?GEN_OTH_C_RT_REIRR.
+}
+##########################################
+
+select 
+?GEN_RELATION
+where {
+    #relationship status
+    ?Patient rdf:type ncit:C16960;
+        roo:has_relationship_status ?relationship.  
+    ?relationship roo:local_value ?GEN_RELATION.
+}
+##########################################
+
+select 
+?GEN_GENDER
+where {
+    #biological sex
+    ?Patient rdf:type ncit:C16960;
+        roo:P100018 ?sex.  
+    ?sex roo:P100042 ?GEN_GENDER.
+}
+##########################################
+
+select 
+?GEN_SMOKING
+?GEN_SM_PACKYEARS
+?GEN_SM_STOPMONTHS
+where {
+    #smoking status
+    ?Patient rdf:type ncit:C16960;
+        roo:P100306 ?smokingStatus.  
+    ?smokingStatus roo:local_value ?GEN_SMOKING.
+    ?smokingStatus roo:P100306 ?former.
+    ?former rdf:type ncit:C67148;
+    	roo:P100042 ?GEN_SM_PACKYEARS;
+    	roo:has_time_period ?timeStopped.
+    ?timeStopped roo:local_value ?GEN_SM_STOPMONTHS.    
+    ?smokingStatus roo:P100306 ?current. 
+    ?current rdf:type ncit:C67147;
+           roo:P100042 ?GEN_SM_PACKYEARS.
+}
+##########################################
+
+select 
+?GEN_TREAT_CENTRE
+?GEN_DATE_REGISTR
+?GEN_REFER_CENTRE
+where {
+    #treating centre
+    ?Patient rdf:type ncit:C16960;
+     	roo:P100039 ?treatCentre.
+    ?treatCentre roo:local_value ?GEN_TREAT_CENTRE.
+    ?treatCentre roo:has_registration_date ?regDate.
+    ?regDate roo:P100042 ?GEN_DATE_REGISTR.
+    ?treatCentre roo:referred_by ?refCentre.
+    ?refCentre roo:P100042 ?GEN_REFER_CENTRE.
+}
+##########################################
