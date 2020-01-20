@@ -91,6 +91,7 @@ map:patient rr:predicateObjectMap [
 # ?GEN_ALCOHOL_GLASS 
 # ?GEN_ALCOHOL_DAYS
 # where {
+#     #alcohol use history
 #     ?Patient rdf:type ncit:C16960;
 #      	roo:P100022 ?alcUseHist.
 #     ?alcUseHist roo:local_value ?GEN_ALCOHOL.
