@@ -5,7 +5,7 @@
 map:patientQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
     GEN_IDNUMBER as id 
-        FROM PBDWHackathon2018;""";
+        FROM gen_patient;""";
     rdfs:label "";
     skos:definition "".
 
