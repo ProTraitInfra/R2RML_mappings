@@ -80,6 +80,7 @@ map:patient a rr:TriplesMap;
             rr:joinCondition [
                 rr:child "gen_idnumber";
                 rr:parent "gen_idnumber";
+            ];
         ];
     ];
     rr:predicateObjectMap [
@@ -250,46 +251,6 @@ map:dvh a rr:TriplesMap;
                 rr:parent "gen_idnumber";
             ];
         ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100423; #consists_of
-        rr:objectMap [
-            rr:parentTriplesMap map:hn_bl_weight_loss;
-            rr:joinCondition [
-                rr:child "gen_idnumber";
-                rr:parent "gen_idnumber";
-            ];
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100423; #consists_of
-        rr:objectMap [
-            rr:parentTriplesMap map:hn_bl_tstage_7;
-            rr:joinCondition [
-                rr:child "gen_idnumber";
-                rr:parent "gen_idnumber";
-            ];
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100423; #consists_of
-        rr:objectMap [
-            rr:parentTriplesMap map:hn_bl_therrt_oar_cric_md;
-            rr:joinCondition [
-                rr:child "gen_idnumber";
-                rr:parent "gen_idnumber";
-            ];
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100423; #consists_of
-        rr:objectMap [
-            rr:parentTriplesMap map:hn_bl_therrt_ph_oar_cric_md;
-            rr:joinCondition [
-                rr:child "gen_idnumber";
-                rr:parent "gen_idnumber";
-            ];
-        ];
     ].
 #################   Mappings    ###################################################################
 
@@ -307,36 +268,6 @@ map:hn_bl_tumour_site a rr:TriplesMap;
             rr:datatype xsd:string;
         ];
     ].
-#hn_bl_weight_loss
-map:hn_bl_weight_loss a rr:TriplesMap;
-    rr:logicalTable map:dvhQuery;    
-    rr:subjectMap [
-        rr:template "patient/{gen_idnumber}/dvh/hn_bl_weight_loss/{hn_bl_weight_loss}";
-        rr:class roo:WeightLoss; #Placeholder
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042; #has_value
-        rr:objectMap [
-            rr:column "hn_bl_weight_loss";
-            rr:datatype xsd:string;
-        ];
-    ].
-#hn_bl_tstage_7
-map:hn_bl_tstage_7 a rr:TriplesMap;
-    rr:logicalTable map:dvhQuery;    
-    rr:subjectMap [
-        rr:template "patient/{gen_idnumber}/dvh/hn_bl_tstage_7/{hn_bl_tstage_7}";
-        rr:class roo:Tstage_7; #Placeholder
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042; #has_value
-        rr:objectMap [
-            rr:column "hn_bl_tstage_7";
-            rr:datatype xsd:string;
-        ];
-    ].
-
-
 
     
 #hn_bl_therrt_oar_paro_r_md
@@ -382,7 +313,7 @@ map:hn_bl_therrt_oar_subm_r_md a rr:TriplesMap;
         ];
     ].
 #hn_bl_therrt_oar_subm_l_md
-map:PAIN_DISCOMF a rr:TriplesMap;
+map:hn_bl_therrt_oar_subm_l_md a rr:TriplesMap;
     rr:logicalTable map:dvhQuery;    
     rr:subjectMap [
         rr:template "patient/{gen_idnumber}/dvhd/hn_bl_therrt_oar_subm_l_md/{hn_bl_therrt_oar_subm_l_md}";
@@ -434,20 +365,6 @@ map:hn_bl_therrt_oar_pcm_inf_md a rr:TriplesMap;
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
             rr:column "hn_bl_therrt_oar_pcm_inf_md";
-            rr:datatype xsd:double;
-        ];
-    ].
-#hn_bl_therrt_oar_cric_md
-map:hn_bl_therrt_oar_cric_md a rr:TriplesMap;
-    rr:logicalTable map:dvhQuery;    
-    rr:subjectMap [
-        rr:template "patient/{gen_idnumber}/dvh/hn_bl_therrt_oar_cric_md/{hn_bl_therrt_oar_cric_md}";
-        rr:class roo:Dmean_cric_pro; #Placeholder
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042; #has_value
-        rr:objectMap [
-            rr:column "hn_bl_therrt_oar_cric_md";
             rr:datatype xsd:double;
         ];
     ].
@@ -551,20 +468,6 @@ map:hn_bl_therrt_ph_oar_pcm_inf_md a rr:TriplesMap;
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
             rr:column "hn_bl_therrt_ph_oar_pcm_inf_md";
-            rr:datatype xsd:double;
-        ];
-    ].
-#hn_bl_therrt_ph_oar_cric_md
-map:hn_bl_therrt_ph_oar_cric_md a rr:TriplesMap;
-    rr:logicalTable map:dvhQuery;    
-    rr:subjectMap [
-        rr:template "patient/{gen_idnumber}/dvh/hn_bl_therrt_ph_oar_cric_md/{hn_bl_therrt_ph_oar_cric_md}";
-        rr:class roo:Dmean_cric_pho; #Placeholder
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042; #has_value
-        rr:objectMap [
-            rr:column "hn_bl_therrt_ph_oar_cric_md";
             rr:datatype xsd:double;
         ];
     ].
