@@ -792,7 +792,7 @@ map:radiotherapyTreatmentTechnique a rr:TriplesMap;
     ].
 
 map:reirradiation a rr:TriplesMap;
-    rr:logicalTable map:previousNeoplasmDiagnosisQuery; 
+    rr:logicalTable map:neoplasmDiagnosisQuery; 
     rr:subjectMap [
         rr:template "patient/{id}/radiotherapy/reirradiation/{GEN_OTH_C_RT_REIRR}";
         rr:class roo:reirradiation; #new roo class
