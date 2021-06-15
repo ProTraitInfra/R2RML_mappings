@@ -848,7 +848,7 @@ map:previousNeoplasm a rr:TriplesMap;
     rr:predicateObjectMap [
         rr:predicate roo:P100202; #has_location 
         rr:objectMap [
-            rr:parentTriplesMap map:tumourSite;
+            rr:parentTriplesMap map:othTumourSite;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -886,7 +886,7 @@ map:previousNeoplasm a rr:TriplesMap;
         ];
     ].
 
-map:tumourSite a rr:TriplesMap;
+map:othTumourSite a rr:TriplesMap;
     rr:logicalTable map:previousNeoplasmDiagnosisQuery;    
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/tumourSite/{GEN_OTH_C_SITE}";
