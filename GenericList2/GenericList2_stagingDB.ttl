@@ -1092,7 +1092,7 @@ map:PlanningComparisonVersion a rr:TriplesMap;
 map:planningComparisonOutcome a rr:TriplesMap;
     rr:logicalTable map:planningComparisonQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/radiotherapy/planningComparison/PlanningComparisonYesNo/planningComparisonOutcome/{gen_comp_outcome}";
+        rr:template "patient/{id}/radiotherapy/planningComparison/planningComparisonOutcome/{gen_comp_outcome}";
         rr:class roo:planningComparisonOutcome; #new roo class
     ];
      rr:predicateObjectMap [
@@ -1120,7 +1120,7 @@ map:protonTherapy a rr:TriplesMap;
 map:reasonNegativeProtonTherapyWithPositiveDSS a rr:TriplesMap;
     rr:logicalTable map:planningComparisonQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/vradiotherapy/planningComparison/PlanningComparisonYesNo/reasonNegativeProtonTherapyWithPositivePlanningComparison/{gen_reason_protons}";
+        rr:template "patient/{id}/vradiotherapy/planningComparison/reasonNegativeProtonTherapyWithPositivePlanningComparison/{gen_reason_protons}";
         rr:class roo:reasonNegativeProtonTherapyWithPositivePlanningComparison; #new roo class
     ];
      rr:predicateObjectMap [
