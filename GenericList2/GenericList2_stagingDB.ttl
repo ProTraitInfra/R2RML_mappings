@@ -694,7 +694,7 @@ map:patient rr:predicateObjectMap [
 map:neoplasmDiagnosisQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
     gen_idnumber as id, 
-    gen_date_diagn, 
+    gen_date_diag, 
     gen_tumoursite, 
     gen_rt_treatment,
     gen_oth_c_rt_reirr 
@@ -752,13 +752,13 @@ map:neoplasm a rr:TriplesMap;
 map:dateOfFirstDiagnosis a rr:TriplesMap;
     rr:logicalTable map:neoplasmDiagnosisQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/neoplasm/dateOfFirstDiagnosis/{gen_date_diagn}";
+        rr:template "patient/{id}/neoplasm/dateOfFirstDiagnosis/{gen_date_diag}";
         rr:class roo:dateOfFirstDiagnosis; #new roo class
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "gen_date_diagn"; 
+            rr:column "gen_date_diag"; 
             rr:datatype xsd:date;
         ];
     ].
