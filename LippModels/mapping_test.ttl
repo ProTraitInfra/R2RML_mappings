@@ -1,0 +1,634 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix ex: <http://example.com/ns#>.
+@prefix map: <http://mapping.local/>.
+@prefix sty: <http://purl.bioontology.org/ontology/STY/>.
+@prefix sio: <http://semanticscience.org/resource/SIO_>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix ncit: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>.
+@prefix roo: <http://www.cancerdata.org/roo/>.
+@prefix icd: <http://purl.bioontology.org/ontology/ICD10/>.
+@prefix skos: <http://www.w3.org/2008/05/skos#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix uo: <http://purl.obolibrary.org/obo/UO_>.
+@prefix time: <http://www.w3.org/2006/time#>.
+ 
+
+###########################################
+# Add patient 
+###########################################
+map:patientQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT 
+    gen_idnumber as id 
+        FROM gen_patient;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:patient a rr:TriplesMap;
+    rr:logicalTable map:patientQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}";
+        rr:class ncit:C16960; #patient
+    ].
+
+###########################################
+# Add identifier                                
+###########################################
+map:identifier a rr:TriplesMap;
+    rr:logicalTable map:patientQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/";
+        rr:class ncit:C25364; #identifier
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "id"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100061; #has_person_identifier
+        rr:objectMap [
+            rr:parentTriplesMap map:identifier;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+
+###########################################
+# Add treating centre
+###########################################
+map:headNeckToxQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT 
+    gen_idnumber as id, 
+    hn_tox_id,
+    hn_tox_xerostomia, 
+    hn_tox_dysph,
+    hn_tox_timepoint
+        FROM hn_tox;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:toxID a rr:TriplesMap;
+    rr:logicalTable map:headNeckToxQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/tox/{hn_tox_id}";
+        rr:class roo:toxID;  #placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "hn_tox_id"; 
+            rr:datatype xsd:string;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_timepoint; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:timepoint;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];        
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_xero; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:xero;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];        
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_dysph; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:dysph;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:timepoint a rr:TriplesMap;
+    rr:logicalTable map:headNeckToxQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/tox/{hn_tox_timepoint}";
+        rr:class ncit:C25646; #registration
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_tox_timepoint"; 
+            rr:datatype xsd:string;
+        ];
+    ].     
+
+map:xero a rr:TriplesMap;
+    rr:logicalTable map:headNeckToxQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/tox/{hn_tox_xerostomia}";
+        rr:class ncit:C19326; #clinics and hospitals 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_tox_xerostomia"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:dysph rr:TriplesMap;
+    rr:logicalTable map:headNeckToxQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/tox/{hn_tox_dysph}";
+        rr:class ncit:C19326; #clinics and hospitals 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_tox_dysph"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100039; #is_treated_in
+        rr:objectMap [
+            rr:parentTriplesMap map:treatingCentre;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+
+
+###########################################
+# Add planning comparison 
+###########################################
+map:dvhQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT 
+    gen_idnumber as id,
+
+    hn_bl_tumour_site,
+    hn_bl_therrt_oar_paro_r_md,
+    hn_bl_therrt_oar_paro_l_md,
+    hn_bl_therrt_oar_subm_r_md,
+    hn_bl_therrt_oar_subm_l_md,
+    hn_bl_therrt_oar_pcm_sup_md,
+    hn_bl_therrt_oar_pcm_med_md,
+    hn_bl_therrt_oar_pcm_inf_md,
+
+    hn_bl_therrt_ph_oar_paro_r_md,
+    hn_bl_therrt_ph_oar_paro_l_md,
+    hn_bl_therrt_ph_oar_subm_r_md,
+    hn_bl_therrt_ph_oar_subm_l_md,
+    hn_bl_therrt_ph_oar_pcm_sup_md,
+    hn_bl_therrt_ph_oar_pcm_med_md,
+    hn_bl_therrt_ph_oar_pcm_inf_md,
+    hn_bl_therrt_oar_ext_oc_md,
+    hn_bl_therrt_ph_oar_ext_oc_md
+
+        FROM hn_bl;""";
+    rdfs:label "";
+    skos:definition "".
+
+
+map:dvh a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}";
+        rr:class ncit:C112816; #Dose Value Histogram
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of C157120
+        rr:objectMap [
+            rr:parentTriplesMap map:hn_bl_tumour_site;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:hn_bl_therrt_oar_paro_r_md;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:HN_BL_THERRT_OAR_EXT_OC_MD;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:HN_BL_THERRT_PH_OAR_EXT_OC_MD;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:hn_bl_therrt_oar_paro_l_md;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:hn_bl_therrt_oar_subm_r_md;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:hn_bl_therrt_oar_subm_l_md;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:hn_bl_therrt_oar_pcm_sup_md;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:hn_bl_therrt_oar_pcm_med_md;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:hn_bl_therrt_oar_pcm_inf_md;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:hn_bl_therrt_ph_oar_paro_r_md;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:hn_bl_therrt_ph_oar_paro_l_md;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:hn_bl_therrt_ph_oar_subm_r_md;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:hn_bl_therrt_ph_oar_subm_l_md;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:hn_bl_therrt_ph_oar_pcm_sup_md;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:hn_bl_therrt_ph_oar_pcm_med_md;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:hn_bl_therrt_ph_oar_pcm_inf_md;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+#hn_bl_tumour_site
+map:hn_bl_tumour_site a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvh/hn_bl_tumour_site/{hn_bl_tumour_site}";
+        rr:class roo:TumourSite; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_tumour_site";
+            rr:datatype xsd:string;
+        ];
+    ].
+#hn_bl_therrt_oar_paro_r_md
+map:hn_bl_therrt_oar_paro_r_md a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvh/hn_bl_therrt_oar_paro_r_md/{hn_bl_therrt_oar_paro_r_md}";
+        rr:class roo:Dmean_paro_r_pro; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_therrt_oar_paro_r_md";
+            rr:datatype xsd:double;
+        ];
+    ].
+#hn_bl_therrt_oar_paro_l_md
+map:hn_bl_therrt_oar_paro_l_md a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvh/hn_bl_therrt_oar_paro_l_md/{hn_bl_therrt_oar_paro_l_md}";
+        rr:class roo:Dmean_paro_l_pro; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_therrt_oar_paro_l_md";
+            rr:datatype xsd:double;
+        ];
+    ].
+#hn_bl_therrt_oar_subm_r_md
+map:hn_bl_therrt_oar_subm_r_md a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvh/hn_bl_therrt_oar_subm_r_md/{hn_bl_therrt_oar_subm_r_md}";
+        rr:class roo:Dmean_subm_r_pro; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_therrt_oar_subm_r_md";
+            rr:datatype xsd:double;
+        ];
+    ].
+#hn_bl_therrt_oar_subm_l_md
+map:hn_bl_therrt_oar_subm_l_md a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvhd/hn_bl_therrt_oar_subm_l_md/{hn_bl_therrt_oar_subm_l_md}";
+        rr:class roo:Dmean_subm_l_pro; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_therrt_oar_subm_l_md";
+            rr:datatype xsd:double;
+        ];
+    ].
+#hn_bl_therrt_oar_pcm_sup_md
+map:hn_bl_therrt_oar_pcm_sup_md a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvh/hn_bl_therrt_oar_pcm_sup_md/{hn_bl_therrt_oar_pcm_sup_md}";
+        rr:class roo:Dmean_pcm_sup_pro; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_therrt_oar_pcm_sup_md";
+            rr:datatype xsd:double;
+        ];
+    ].
+#hn_bl_therrt_oar_pcm_med_md
+map:hn_bl_therrt_oar_pcm_med_md a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvh/hn_bl_therrt_oar_pcm_med_md/{hn_bl_therrt_oar_pcm_med_md}";
+        rr:class roo:Dmean_pcm_med_pro; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_therrt_oar_pcm_med_md";
+            rr:datatype xsd:double;
+        ];
+    ].
+#hn_bl_therrt_oar_pcm_inf_md
+map:hn_bl_therrt_oar_pcm_inf_md a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvh/hn_bl_therrt_oar_pcm_inf_md/{hn_bl_therrt_oar_pcm_inf_md}";
+        rr:class roo:Dmean_pcm_inf_pro; #
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_therrt_oar_pcm_inf_md";
+            rr:datatype xsd:double;
+        ];
+    ].
+#hn_bl_therrt_ph_oar_paro_r_md
+map:hn_bl_therrt_ph_oar_paro_r_md a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvh/hn_bl_therrt_ph_oar_paro_r_md/{hn_bl_therrt_ph_oar_paro_r_md}";
+        rr:class roo:Dmean_paro_r_pho; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_therrt_ph_oar_paro_r_md";
+            rr:datatype xsd:double;
+        ];
+    ].
+#hn_bl_therrt_ph_oar_paro_l_md
+map:hn_bl_therrt_ph_oar_paro_l_md a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvh/hn_bl_therrt_ph_oar_paro_l_md/{hn_bl_therrt_ph_oar_paro_l_md}";
+        rr:class roo:Dmean_paro_l_pho:; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_therrt_ph_oar_paro_l_md";
+            rr:datatype xsd:double;
+        ];
+    ].
+#hn_bl_therrt_ph_oar_subm_r_md
+map:hn_bl_therrt_ph_oar_subm_r_md a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvh/hn_bl_therrt_ph_oar_subm_r_md/{hn_bl_therrt_ph_oar_subm_r_md}";
+        rr:class roo:Dmean_subm_r_pho; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_therrt_ph_oar_subm_r_md";
+            rr:datatype xsd:double;
+        ];
+    ].
+#hn_bl_therrt_ph_oar_subm_l_md
+map:hn_bl_therrt_ph_oar_subm_l_md a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvhd/hn_bl_therrt_ph_oar_subm_l_md/{hn_bl_therrt_ph_oar_subm_l_md}";
+        rr:class roo:Dmean_subm_l_pho; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_therrt_ph_oar_subm_l_md";
+            rr:datatype xsd:double;
+        ];
+    ].
+#hn_bl_therrt_ph_oar_pcm_sup_md
+map:hn_bl_therrt_ph_oar_pcm_sup_md a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvh/hn_bl_therrt_ph_oar_pcm_sup_md/{hn_bl_therrt_ph_oar_pcm_sup_md}";
+        rr:class roo:Dmean_pcm_sup_pho; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_therrt_ph_oar_pcm_sup_md";
+            rr:datatype xsd:double;
+        ];
+    ].
+#hn_bl_therrt_ph_oar_pcm_med_md
+map:hn_bl_therrt_ph_oar_pcm_med_md a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvh/hn_bl_therrt_ph_oar_pcm_med_md/{hn_bl_therrt_ph_oar_pcm_med_md}";
+        rr:class roo:Dmean_pcm_med_pho; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_therrt_ph_oar_pcm_med_md";
+            rr:datatype xsd:double;
+        ];
+    ].
+#hn_bl_therrt_ph_oar_pcm_inf_md
+map:hn_bl_therrt_ph_oar_pcm_inf_md a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvh/hn_bl_therrt_ph_oar_pcm_inf_md/{hn_bl_therrt_ph_oar_pcm_inf_md}";
+        rr:class roo:Dmean_pcm_inf_pho; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_therrt_ph_oar_pcm_inf_md";
+            rr:datatype xsd:double;
+        ];
+    ].
+#HN_BL_THERRT_OAR_EXT_OC_MD
+map:HN_BL_THERRT_OAR_EXT_OC_MD a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvh/HN_BL_THERRT_OAR_EXT_OC_MD/{HN_BL_THERRT_OAR_EXT_OC_MD}";
+        rr:class roo:HN_BL_THERRT_OAR_EXT_OC_MD; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_bl_therrt_ph_oar_pcm_inf_md";
+            rr:datatype xsd:double;
+        ];
+    ].
+#HN_BL_THERRT_PH_OAR_EXT_OC_MD
+map:HN_BL_THERRT_PH_OAR_EXT_OC_MD a rr:TriplesMap;
+    rr:logicalTable map:dvhQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/dvh/HN_BL_THERRT_PH_OAR_EXT_OC_MD/{HN_BL_THERRT_PH_OAR_EXT_OC_MD}";
+        rr:class roo:HN_BL_THERRT_PH_OAR_EXT_OC_MD; #Placeholder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "HN_BL_THERRT_PH_OAR_EXT_OC_MD";
+            rr:datatype xsd:double;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100024; #has_procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:dvh;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
