@@ -163,9 +163,9 @@ map:dysph rr:TriplesMap;
     ].
 
 map:patient rr:predicateObjectMap [
-        rr:predicate roo:P100039; #is_treated_in
+        rr:predicate roo:has_toxID; #is_treated_in
         rr:objectMap [
-            rr:parentTriplesMap map:treatingCentre;
+            rr:parentTriplesMap map:toxID;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
