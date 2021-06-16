@@ -21,7 +21,7 @@
 ###########################################
 map:patientQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
-    GEN_IDNUMBER as id 
+    gen_idnumber as id 
         FROM gen_patient;""";
     rdfs:label "";
     skos:definition "".
@@ -67,10 +67,10 @@ map:patient rr:predicateObjectMap [
 ###########################################
 map:treatingCentreQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
-    GEN_IDNUMBER as id, 
-    GEN_TREAT_CENTER, 
-    GEN_DATE_REGISTR, 
-    GEN_REFER_CENTER 
+    gen_idnumber as id, 
+    gen_treat_center, 
+    gen_date_registr, 
+    gen_refer_center 
         FROM gen_patient;""";
     rdfs:label "";
     skos:definition "".
@@ -78,13 +78,13 @@ map:treatingCentreQuery a rr:LogicalTable;
 map:treatingCentre a rr:TriplesMap;
     rr:logicalTable map:treatingCentreQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/treatingCentre/{GEN_TREAT_CENTER}";
+        rr:template "patient/{id}/treatingCentre/{gen_treat_center}";
         rr:class ncit:C19326;  #clinics and hospitals
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
         rr:objectMap [
-            rr:column "GEN_TREAT_CENTER"; 
+            rr:column "gen_treat_center"; 
             rr:datatype xsd:string;
         ];
     ];
@@ -112,13 +112,13 @@ map:treatingCentre a rr:TriplesMap;
 map:registrationDate a rr:TriplesMap;
     rr:logicalTable map:treatingCentreQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/registration/{GEN_DATE_REGISTR}";
+        rr:template "patient/{id}/registration/{gen_date_registr}";
         rr:class ncit:C25646; #registration
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_DATE_REGISTR"; 
+            rr:column "gen_date_registr"; 
             rr:datatype xsd:date;
         ];
     ].     
@@ -126,13 +126,13 @@ map:registrationDate a rr:TriplesMap;
 map:referringCentre a rr:TriplesMap;
     rr:logicalTable map:treatingCentreQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/registration/{GEN_REFER_CENTER}";
+        rr:template "patient/{id}/registration/{gen_refer_center}";
         rr:class ncit:C19326; #clinics and hospitals 
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_REFER_CENTER"; 
+            rr:column "gen_refer_center"; 
             rr:datatype xsd:string;
         ];
     ].
@@ -153,8 +153,8 @@ map:patient rr:predicateObjectMap [
 ###########################################    
 map:sexQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
-    GEN_IDNUMBER as id, 
-    GEN_GENDER 
+    gen_idnumber as id, 
+    gen_gender 
         FROM gen_patient;""";
     rdfs:label "";
     skos:definition "".
@@ -162,13 +162,13 @@ map:sexQuery a rr:LogicalTable;
 map:biologicalSex a rr:TriplesMap;
     rr:logicalTable map:sexQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/biologicalSex/{GEN_GENDER}";
+        rr:template "patient/{id}/biologicalSex/{gen_gender}";
         rr:class ncit:C28421; #sex
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_GENDER";
+            rr:column "gen_gender";
             rr:datatype xsd:string;
         ];
     ].  
@@ -189,8 +189,8 @@ map:patient rr:predicateObjectMap [
 ###########################################    
 map:ageAtDiagnosisQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
-    GEN_IDNUMBER as id, 
-    GEN_AGE  
+    gen_idnumber as id, 
+    gen_age  
         FROM gen_patient;""";
     rdfs:label "";
     skos:definition "".
@@ -198,13 +198,13 @@ map:ageAtDiagnosisQuery a rr:LogicalTable;
 map:ageAtDiagnosis a rr:TriplesMap;
     rr:logicalTable map:ageAtDiagnosisQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/ageAtDiagnosis/{GEN_AGE}";
+        rr:template "patient/{id}/ageAtDiagnosis/{gen_age}";
         rr:class roo:C100002; #age_at_diagnosis
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042;  #has_value
         rr:objectMap [
-            rr:column "GEN_AGE"; 
+            rr:column "gen_age"; 
             rr:datatype xsd:integer;
         ];
     ];                                                            
@@ -235,8 +235,8 @@ map:patient rr:predicateObjectMap [
 ###########################################   
 map:birthYearQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
-    GEN_IDNUMBER as id, 
-    GEN_YEAR_BIRTH  
+    gen_idnumber as id, 
+    gen_year_birth  
         FROM gen_patient;""";
     rdfs:label "";
     skos:definition "".
@@ -244,13 +244,13 @@ map:birthYearQuery a rr:LogicalTable;
 map:birthYear a rr:TriplesMap;
     rr:logicalTable map:birthYearQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/birthYear/{GEN_YEAR_BIRTH}";
+        rr:template "patient/{id}/birthYear/{gen_year_birth}";
         rr:class ncit:C25155; #birth
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100027; #has_unit
         rr:objectMap [
-            rr:column "GEN_YEAR_BIRTH";
+            rr:column "gen_year_birth";
             rr:datatype xsd:gYear;
         ];
     ].
@@ -271,8 +271,8 @@ map:patient rr:predicateObjectMap [
 ###########################################  
 map:educationLevelQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
-    GEN_IDNUMBER as id, 
-    GEN_EDUCATION  
+    gen_idnumber as id, 
+    gen_education  
         FROM gen_patient;""";
     rdfs:label "";
     skos:definition "".
@@ -280,13 +280,13 @@ map:educationLevelQuery a rr:LogicalTable;
 map:educationLevel a rr:TriplesMap;
     rr:logicalTable map:educationLevelQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/educationLevel/{GEN_EDUCATION}";
+        rr:template "patient/{id}/educationLevel/{gen_education}";
         rr:class ncit:C17953; #education level
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
         rr:objectMap [
-            rr:column "GEN_EDUCATION";
+            rr:column "gen_education";
             rr:datatype xsd:string;
         ];
     ].
@@ -308,8 +308,8 @@ map:patient rr:predicateObjectMap [
 ########################################### 
 map:relationshipStatusQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
-    GEN_IDNUMBER as id, 
-    GEN_RELATIONSHIP  
+    gen_idnumber as id, 
+    gen_relationship  
         FROM gen_patient;""";
     rdfs:label "";
     skos:definition "".
@@ -317,13 +317,13 @@ map:relationshipStatusQuery a rr:LogicalTable;
 map:relationshipStatus a rr:TriplesMap;
     rr:logicalTable map:relationshipStatusQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/relationshipStatus/{GEN_RELATIONSHIP}";
+        rr:template "patient/{id}/relationshipStatus/{gen_relationship}";
         rr:class ncit:C25188; #marital status
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
         rr:objectMap [
-            rr:column "GEN_RELATIONSHIP";
+            rr:column "gen_relationship";
             rr:datatype xsd:string;
         ];
     ].
@@ -344,10 +344,10 @@ map:patient rr:predicateObjectMap [
 ###########################################  
 map:smokingStatusQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
-    GEN_IDNUMBER as id, 
-    GEN_SMOKING, 
-    GEN_SM_PACKYEARS, 
-    GEN_SM_STOPMONTHS 
+    gen_idnumber as id, 
+    gen_smoking, 
+    gen_sm_packyears, 
+    gen_sm_stopmonths 
         FROM gen_smoking;""";
     rdfs:label "";
     skos:definition "".
@@ -355,13 +355,13 @@ map:smokingStatusQuery a rr:LogicalTable;
 map:smokingStatus a rr:TriplesMap;
     rr:logicalTable map:smokingStatusQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/smokingStatus/{GEN_SMOKING}";
+        rr:template "patient/{id}/smokingStatus/{gen_smoking}";
         rr:class ncit:C19796; #smoking status
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
         rr:objectMap [
-            rr:column "GEN_SMOKING"; 
+            rr:column "gen_smoking"; 
             rr:datatype xsd:string;
         ];
     ];
@@ -389,13 +389,13 @@ map:smokingStatus a rr:TriplesMap;
 map:formerSmoker a rr:TriplesMap;
     rr:logicalTable map:smokingStatusQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/smokingStatus/formerSmoker/{GEN_SM_PACKYEARS}";
+        rr:template "patient/{id}/smokingStatus/formerSmoker/{gen_sm_packyears}";
         rr:class ncit:C67148; #former smoker
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_SM_PACKYEARS";
+            rr:column "gen_sm_packyears";
             rr:datatype xsd:integer;
         ];
     ];
@@ -423,13 +423,13 @@ map:formerSmoker a rr:TriplesMap;
 map:timeStoppedSmoking a rr:TriplesMap;
     rr:logicalTable map:smokingStatusQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/smokingStatus/formerSmoker/timeStoppedSmoking/{GEN_SM_STOPMONTHS}";
+        rr:template "patient/{id}/smokingStatus/formerSmoker/timeStoppedSmoking/{gen_sm_stopmonths}";
         rr:class roo:timeStoppedSmoking;
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value; 
         rr:objectMap [
-            rr:column "GEN_SM_STOPMONTHS";
+            rr:column "gen_sm_stopmonths";
             rr:datatype xsd:string;
         ];
     ];
@@ -447,13 +447,13 @@ map:timeStoppedSmoking a rr:TriplesMap;
 map:currentSmoker a rr:TriplesMap;
     rr:logicalTable map:smokingStatusQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/smokingStatus/currentSmoker/{GEN_SM_PACKYEARS}";
+        rr:template "patient/{id}/smokingStatus/currentSmoker/{gen_sm_packyears}";
         rr:class ncit:C67147;
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_SM_PACKYEARS";
+            rr:column "gen_sm_packyears";
             rr:datatype xsd:integer;
         ];
     ];
@@ -498,10 +498,10 @@ map:patient rr:predicateObjectMap [
 ########################################### 
 map:alcoholUseHistoryQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
-    GEN_IDNUMBER as id, 
-    GEN_ALCOHOL, 
-    GEN_ALCOHOL_DAYS, 
-    GEN_ALCOHOL_GLASS 
+    gen_idnumber as id, 
+    gen_alcohol, 
+    gen_alcohol_days, 
+    gen_alcohol_glass 
         FROM gen_alcohol;""";
     rdfs:label "";
     skos:definition "".
@@ -509,13 +509,13 @@ map:alcoholUseHistoryQuery a rr:LogicalTable;
 map:alcoholUseHistory a rr:TriplesMap;
     rr:logicalTable map:alcoholUseHistoryQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/personalHistory/alcoholUseHistory/{GEN_ALCOHOL}";
+        rr:template "patient/{id}/personalHistory/alcoholUseHistory/{gen_alcohol}";
         rr:class ncit:C81229; #alcohol use history
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
         rr:objectMap [
-            rr:column "GEN_ALCOHOL";
+            rr:column "gen_alcohol";
             rr:datatype xsd:string;
         ];
     ];
@@ -543,13 +543,13 @@ map:alcoholUseHistory a rr:TriplesMap;
 map:daysWithMoreThan1Glass a rr:TriplesMap;
     rr:logicalTable map:alcoholUseHistoryQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/personalHistory/alcoholUseHistory/daysWithMoreThan1Glass/{GEN_ALCOHOL_DAYS}";
+        rr:template "patient/{id}/personalHistory/alcoholUseHistory/daysWithMoreThan1Glass/{gen_alcohol_days}";
         rr:class roo:daysWithMoreThan1Glass; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_ALCOHOL_DAYS"; 
+            rr:column "gen_alcohol_days"; 
             rr:datatype xsd:integer;
         ];
     ].
@@ -557,13 +557,13 @@ map:daysWithMoreThan1Glass a rr:TriplesMap;
 map:numberOfGlasses a rr:TriplesMap;
     rr:logicalTable map:alcoholUseHistoryQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/personalHistory/alcoholUseHistory/numberOfGlasses/{GEN_ALCOHOL_GLASS}";
+        rr:template "patient/{id}/personalHistory/alcoholUseHistory/numberOfGlasses/{gen_alcohol_glass}";
         rr:class roo:numberOfGlasses; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_ALCOHOL_GLASS"; 
+            rr:column "gen_alcohol_glass"; 
             rr:datatype xsd:integer;
         ];
     ].
@@ -585,8 +585,8 @@ map:patient rr:predicateObjectMap [
 ########################################### 
 map:bodyWeightQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
-    GEN_IDNUMBER as id, 
-    GEN_WEIGHT 
+    gen_idnumber as id, 
+    gen_weight 
         FROM gen_patient;""";
     rdfs:label "";
     skos:definition "".
@@ -594,13 +594,13 @@ map:bodyWeightQuery a rr:LogicalTable;
 map:bodyWeight a rr:TriplesMap;
     rr:logicalTable map:bodyWeightQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/bodyWeight/{GEN_WEIGHT}";
+        rr:template "patient/{id}/bodyWeight/{gen_weight}";
         rr:class ncit:C81328; #bodyweight
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042;  #has_value
         rr:objectMap [
-            rr:column "GEN_WEIGHT"; 
+            rr:column "gen_weight"; 
             rr:datatype xsd:integer;
         ];
     ];  
@@ -639,8 +639,8 @@ map:patient rr:predicateObjectMap [
 ########################################### 
 map:bodyHeightQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
-    GEN_IDNUMBER as id, 
-    GEN_HEIGHT  
+    gen_idnumber as id, 
+    gen_height  
         FROM gen_patient;""";
     rdfs:label "";
     skos:definition "".
@@ -648,13 +648,13 @@ map:bodyHeightQuery a rr:LogicalTable;
 map:bodyHeight a rr:TriplesMap;
     rr:logicalTable map:bodyHeightQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/bodyHeight/{GEN_HEIGHT}";
+        rr:template "patient/{id}/bodyHeight/{gen_height}";
         rr:class ncit:C94488; #stature
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042;  #has_value
         rr:objectMap [
-            rr:column "GEN_HEIGHT"; 
+            rr:column "gen_height"; 
             rr:datatype xsd:integer;
         ];
     ];  
@@ -693,11 +693,11 @@ map:patient rr:predicateObjectMap [
 ###########################################    
 map:neoplasmDiagnosisQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
-    GEN_IDNUMBER as id, 
-    GEN_DATE_DIAGN, 
-    GEN_TUMOURSITE, 
-    GEN_RT_TREATMENT,
-    GEN_OTH_C_RT_REIRR 
+    gen_idnumber as id, 
+    gen_date_diagn, 
+    gen_tumoursite, 
+    gen_rt_treatment,
+    gen_oth_c_rt_reirr 
         FROM gen_patient;""";
     rdfs:label "";
     skos:definition "".
@@ -752,13 +752,13 @@ map:neoplasm a rr:TriplesMap;
 map:dateOfFirstDiagnosis a rr:TriplesMap;
     rr:logicalTable map:neoplasmDiagnosisQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/neoplasm/dateOfFirstDiagnosis/{GEN_DATE_DIAGN}";
+        rr:template "patient/{id}/neoplasm/dateOfFirstDiagnosis/{gen_date_diagn}";
         rr:class roo:dateOfFirstDiagnosis; #new roo class
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_DATE_DIAGN"; 
+            rr:column "gen_date_diagn"; 
             rr:datatype xsd:date;
         ];
     ].
@@ -766,13 +766,13 @@ map:dateOfFirstDiagnosis a rr:TriplesMap;
 map:tumourSite a rr:TriplesMap;
     rr:logicalTable map:neoplasmDiagnosisQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/neoplasm/tumourSite/{GEN_TUMOURSITE}";
+        rr:template "patient/{id}/neoplasm/tumourSite/{gen_tumoursite}";
         rr:class ncit:C3263; #neoplasm by site
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
         rr:objectMap [
-            rr:column "GEN_TUMOURSITE";
+            rr:column "gen_tumoursite";
             rr:datatype xsd:string;
         ];
     ].
@@ -780,13 +780,13 @@ map:tumourSite a rr:TriplesMap;
 map:radiotherapyTreatmentTechnique a rr:TriplesMap;
     rr:logicalTable map:neoplasmDiagnosisQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/treatment/radiotherapyTreatmentTechnique/{GEN_RT_TREATMENT}";
+        rr:template "patient/{id}/treatment/radiotherapyTreatmentTechnique/{gen_rt_treatment}";
         rr:class ncit:C15313; #radiation therapy
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
         rr:objectMap [
-            rr:column "GEN_RT_TREATMENT";
+            rr:column "gen_rt_treatment";
             rr:datatype xsd:string;
         ];
     ].
@@ -794,13 +794,13 @@ map:radiotherapyTreatmentTechnique a rr:TriplesMap;
 map:reirradiation a rr:TriplesMap;
     rr:logicalTable map:neoplasmDiagnosisQuery; 
     rr:subjectMap [
-        rr:template "patient/{id}/radiotherapy/reirradiation/{GEN_OTH_C_RT_REIRR}";
+        rr:template "patient/{id}/radiotherapy/reirradiation/{gen_oth_c_rt_reirr}";
         rr:class roo:reirradiation; #new roo class
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_OTH_C_RT_REIRR"; 
+            rr:column "gen_oth_c_rt_reirr"; 
             rr:datatype xsd:boulean;
         ];
     ].
@@ -822,12 +822,12 @@ map:patient rr:predicateObjectMap [
 ##########################################    
 map:previousNeoplasmDiagnosisQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
-    GEN_IDNUMBER as id, 
-    GEN_OTHERCANCER, 
-    GEN_OTH_C_SITE, 
-    GEN_OTH_C_ICD,
-    GEN_OTH_C_DATE, 
-    GEN_OTH_C_RT
+    gen_idnumber as id, 
+    gen_othercancer, 
+    gen_oth_c_site, 
+    gen_oth_c_icd,
+    gen_oth_c_date, 
+    gen_oth_c_rt
         FROM gen_other_cancer;""";
     rdfs:label "";
     skos:definition "".
@@ -835,13 +835,13 @@ map:previousNeoplasmDiagnosisQuery a rr:LogicalTable;
 map:previousNeoplasm a rr:TriplesMap;
     rr:logicalTable map:previousNeoplasmDiagnosisQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/neoplasm/previousNeoplasm/{GEN_OTHERCANCER}";
+        rr:template "patient/{id}/neoplasm/previousNeoplasm/{gen_othercancer}";
         rr:class roo:personalHistoryOfMalignantNeoplasm; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_OTHERCANCER"; 
+            rr:column "gen_othercancer"; 
             rr:datatype xsd:boulean;                                                                 
         ];
     ];
@@ -889,13 +889,13 @@ map:previousNeoplasm a rr:TriplesMap;
 map:othTumourSite a rr:TriplesMap;
     rr:logicalTable map:previousNeoplasmDiagnosisQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/neoplasm/tumourSite/{GEN_OTH_C_SITE}";
+        rr:template "patient/{id}/neoplasm/tumourSite/{gen_oth_c_site}";
         rr:class ncit:C3263; #neoplasm by site
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_OTH_C_SITE";
+            rr:column "gen_oth_c_site";
             rr:datatype xsd:string;
         ];
     ].
@@ -903,13 +903,13 @@ map:othTumourSite a rr:TriplesMap;
 map:ICD_Code a rr:TriplesMap;
     rr:logicalTable map:previousNeoplasmDiagnosisQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/neoplasm/ICDcode/{GEN_OTH_C_ICD}";
+        rr:template "patient/{id}/neoplasm/ICDcode/{gen_oth_c_icd}";
         rr:class ncit:C66766; #ICD-O-3_Code
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_OTH_C_ICD";
+            rr:column "gen_oth_c_icd";
             rr:datatype xsd:string;
         ];
     ].
@@ -917,13 +917,13 @@ map:ICD_Code a rr:TriplesMap;
 map:dateOfDiagnosis a rr:TriplesMap;
     rr:logicalTable map:previousNeoplasmDiagnosisQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/neoplasm/dateOfDiagnosis/{GEN_OTH_C_DATE}";
+        rr:template "patient/{id}/neoplasm/dateOfDiagnosis/{gen_oth_c_date}";
         rr:class roo:dateOfDiagnosis; #new roo predicate?
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_OTH_C_DATE"; 
+            rr:column "gen_oth_c_date"; 
             rr:datatype xsd:gYear;
         ];
     ].
@@ -931,13 +931,13 @@ map:dateOfDiagnosis a rr:TriplesMap;
 map:previousRadiotherapy a rr:TriplesMap;
     rr:logicalTable map:previousNeoplasmDiagnosisQuery; 
     rr:subjectMap [
-        rr:template "patient/{id}/radiotherapy/previousRadiotherapy/{GEN_OTH_C_RT}";
+        rr:template "patient/{id}/radiotherapy/previousRadiotherapy/{gen_oth_c_rt}";
         rr:class roo:previousRadiotherapy; #new roo class
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
         rr:objectMap [
-            rr:column "GEN_OTH_C_RT"; 
+            rr:column "gen_oth_c_rt"; 
             rr:datatype xsd:string;
         ];
     ].
@@ -958,14 +958,14 @@ map:neoplasm rr:predicateObjectMap [
 ###########################################
 map:planningComparisonQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
-    GEN_IDNUMBER as id, 
-    GEN_PLAN_COMPARISON, 
-    GEN_PLAN_COMP_DATE, 
-    GEN_PLAN_COMP_VERSION, 
-    GEN_COMP_OUTCOME, 
-    GEN_DEC_PROTONS, 
-    GEN_REASON_PROTONS, 
-    GEN_REASON_PROT_OTHER
+    gen_idnumber as id, 
+    gen_plan_comparison, 
+    gen_plan_comp_date, 
+    gen_plan_comp_version, 
+    gen_comp_outcome, 
+    gen_dec_protons, 
+    gen_reason_protons, 
+    gen_reason_prot_other
         FROM gen_plan_comparison;""";
     rdfs:label "";
     skos:definition "".
@@ -990,13 +990,13 @@ map:radiotherapy a rr:TriplesMap;
 map:planningComparison a rr:TriplesMap;
     rr:logicalTable map:planningComparisonQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/radiotherapy/planningComparison/PlanningComparisonYesNo/{GEN_PLAN_COMPARISON}";
+        rr:template "patient/{id}/radiotherapy/planningComparison/PlanningComparisonYesNo/{gen_plan_comparison}";
         rr:class roo:planningComparison; #new roo class
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_PLAN_COMPARISON"; 
+            rr:column "gen_plan_comparison"; 
             rr:datatype xsd:boolean;
         ];
     ];
@@ -1064,13 +1064,13 @@ map:planningComparison a rr:TriplesMap;
 map:PlanningComparisonDate a rr:TriplesMap;
     rr:logicalTable map:planningComparisonQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/radiotherapy/planningComparison/PlanningComparisonDate/{GEN_PLAN_COMP_DATE}";
+        rr:template "patient/{id}/radiotherapy/planningComparison/PlanningComparisonDate/{gen_plan_comp_date}";
         rr:class roo:PlanningComparisonDate; #new roo class
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_PLAN_COMP_DATE"; 
+            rr:column "gen_plan_comp_date"; 
             rr:datatype xsd:date;
         ];
     ]. 
@@ -1078,13 +1078,13 @@ map:PlanningComparisonDate a rr:TriplesMap;
 map:PlanningComparisonVersion a rr:TriplesMap;
     rr:logicalTable map:planningComparisonQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/radiotherapy/planningComparison/PlanningComparisonVersion/{GEN_PLAN_COMP_VERSION}";
+        rr:template "patient/{id}/radiotherapy/planningComparison/PlanningComparisonVersion/{gen_plan_comp_version}";
         rr:class roo:PlanningComparisonVersion; #new roo class
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "GEN_PLAN_COMP_VERSION"; 
+            rr:column "gen_plan_comp_version"; 
             rr:datatype xsd:float;
         ];
     ].
@@ -1092,13 +1092,13 @@ map:PlanningComparisonVersion a rr:TriplesMap;
 map:planningComparisonOutcome a rr:TriplesMap;
     rr:logicalTable map:planningComparisonQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/radiotherapy/planningComparison/PlanningComparisonYesNo/planningComparisonOutcome/{GEN_COMP_OUTCOME}";
+        rr:template "patient/{id}/radiotherapy/planningComparison/PlanningComparisonYesNo/planningComparisonOutcome/{gen_comp_outcome}";
         rr:class roo:planningComparisonOutcome; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value;
         rr:objectMap [
-            rr:column "GEN_COMP_OUTCOME"; 
+            rr:column "gen_comp_outcome"; 
             rr:datatype xsd:string;                                                      
         ];
     ].
@@ -1106,13 +1106,13 @@ map:planningComparisonOutcome a rr:TriplesMap;
 map:protonTherapy a rr:TriplesMap;
     rr:logicalTable map:planningComparisonQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/radiotherapy/protonTherapy/{GEN_DEC_PROTONS}";
+        rr:template "patient/{id}/radiotherapy/protonTherapy/{gen_dec_protons}";
         rr:class ncit:C66897; #proton beam radiation therapy
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value 
         rr:objectMap [
-            rr:column "GEN_DEC_PROTONS";
+            rr:column "gen_dec_protons";
             rr:datatype xsd:boulean;
         ];
     ].
@@ -1120,13 +1120,13 @@ map:protonTherapy a rr:TriplesMap;
 map:reasonNegativeProtonTherapyWithPositiveDSS a rr:TriplesMap;
     rr:logicalTable map:planningComparisonQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/vradiotherapy/planningComparison/PlanningComparisonYesNo/reasonNegativeProtonTherapyWithPositivePlanningComparison/{GEN_REASON_PROTONS}";
+        rr:template "patient/{id}/vradiotherapy/planningComparison/PlanningComparisonYesNo/reasonNegativeProtonTherapyWithPositivePlanningComparison/{gen_reason_protons}";
         rr:class roo:reasonNegativeProtonTherapyWithPositivePlanningComparison; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
         rr:objectMap [
-            rr:column "GEN_REASON_PROTONS"; 
+            rr:column "gen_reason_protons"; 
             rr:datatype xsd:string;  
         ];
     ].
@@ -1134,13 +1134,13 @@ map:reasonNegativeProtonTherapyWithPositiveDSS a rr:TriplesMap;
 map:reasonProtonOther a rr:TriplesMap;
     rr:logicalTable map:planningComparisonQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/vradiotherapy/planningComparison/PlanningComparisonYesNo/reasonProtonOther/{GEN_REASON_PROT_OTHER}";
+        rr:template "patient/{id}/vradiotherapy/planningComparison/PlanningComparisonYesNo/reasonProtonOther/{gen_reason_prot_other}";
         rr:class roo:reasonProtonOther; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
         rr:objectMap [
-            rr:column "GEN_REASON_PROT_OTHER"; 
+            rr:column "gen_reason_prot_other"; 
             rr:datatype xsd:string;  
         ];
     ].
