@@ -235,7 +235,7 @@ map:dvh a rr:TriplesMap;
     rr:predicateObjectMap [
         rr:predicate roo:P100423; #consists_of
         rr:objectMap [
-            rr:parentTriplesMap map:HN_BL_THERRT_OAR_EXT_OC_MD;
+            rr:parentTriplesMap map:hn_bl_therrt_oar_ext_oc_md;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -245,7 +245,7 @@ map:dvh a rr:TriplesMap;
     rr:predicateObjectMap [
         rr:predicate roo:P100423; #consists_of
         rr:objectMap [
-            rr:parentTriplesMap map:HN_BL_THERRT_PH_OAR_EXT_OC_MD;
+            rr:parentTriplesMap map:hn_bl_therrt_ph_oar_ext_oc_md;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -593,12 +593,12 @@ map:hn_bl_therrt_ph_oar_pcm_inf_md a rr:TriplesMap;
             rr:datatype xsd:double;
         ];
     ].
-#HN_BL_THERRT_OAR_EXT_OC_MD
-map:HN_BL_THERRT_OAR_EXT_OC_MD a rr:TriplesMap;
+#hn_bl_therrt_oar_ext_oc_md
+map:hn_bl_therrt_oar_ext_oc_md a rr:TriplesMap;
     rr:logicalTable map:dvhQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/dvh/HN_BL_THERRT_OAR_EXT_OC_MD/{HN_BL_THERRT_OAR_EXT_OC_MD}";
-        rr:class roo:HN_BL_THERRT_OAR_EXT_OC_MD; #Placeholder
+        rr:template "patient/{id}/dvh/hn_bl_therrt_oar_ext_oc_md/{hn_bl_therrt_oar_ext_oc_md}";
+        rr:class roo:hn_bl_therrt_oar_ext_oc_md; #Placeholder
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
@@ -607,17 +607,17 @@ map:HN_BL_THERRT_OAR_EXT_OC_MD a rr:TriplesMap;
             rr:datatype xsd:double;
         ];
     ].
-#HN_BL_THERRT_PH_OAR_EXT_OC_MD
-map:HN_BL_THERRT_PH_OAR_EXT_OC_MD a rr:TriplesMap;
+#hn_bl_therrt_ph_oar_ext_oc_md
+map:hn_bl_therrt_ph_oar_ext_oc_md a rr:TriplesMap;
     rr:logicalTable map:dvhQuery;    
     rr:subjectMap [
-        rr:template "patient/{id}/dvh/HN_BL_THERRT_PH_OAR_EXT_OC_MD/{HN_BL_THERRT_PH_OAR_EXT_OC_MD}";
-        rr:class roo:HN_BL_THERRT_PH_OAR_EXT_OC_MD; #Placeholder
+        rr:template "patient/{id}/dvh/hn_bl_therrt_ph_oar_ext_oc_md/{hn_bl_therrt_ph_oar_ext_oc_md}";
+        rr:class roo:hn_bl_therrt_ph_oar_ext_oc_md; #Placeholder
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "HN_BL_THERRT_PH_OAR_EXT_OC_MD";
+            rr:column "hn_bl_therrt_ph_oar_ext_oc_md";
             rr:datatype xsd:double;
         ];
     ].
