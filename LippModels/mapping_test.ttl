@@ -123,7 +123,7 @@ map:toxID a rr:TriplesMap;
 map:timepoint a rr:TriplesMap;
     rr:logicalTable map:headNeckToxQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/tox/hn_tox_timepoint/{hn_tox_timepoint}";
+        rr:template "patient/{id}/tox/{hn_tox_id}/hn_tox_timepoint/{hn_tox_timepoint}";
         rr:class ncit:C25646; #registration
     ];
     rr:predicateObjectMap [
@@ -137,7 +137,7 @@ map:timepoint a rr:TriplesMap;
 map:xero a rr:TriplesMap;
     rr:logicalTable map:headNeckToxQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/tox/hn_tox_xerostomia/{hn_tox_xerostomia}";
+        rr:template "patient/{id}/tox/{hn_tox_id}/hn_tox_xerostomia/{hn_tox_xerostomia}";
         rr:class roo:xero; #clinics and hospitals 
     ];
     rr:predicateObjectMap [
@@ -151,7 +151,7 @@ map:xero a rr:TriplesMap;
 map:dysph a rr:TriplesMap;
     rr:logicalTable map:headNeckToxQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/tox/hn_tox_dysph/{hn_tox_dysph}";
+        rr:template "patient/{id}/tox/{hn_tox_id}/hn_tox_dysph/{hn_tox_dysph}";
         rr:class roo:dysph;  
     ];
     rr:predicateObjectMap [
