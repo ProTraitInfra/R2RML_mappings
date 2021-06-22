@@ -207,16 +207,16 @@ map:ageAtDiagnosis a rr:TriplesMap;
             rr:column "gen_age"; 
             rr:datatype xsd:integer;
         ];
-    ];                                                            
-    rr:predicateObjectMap [
-        rr:predicate roo:P100029; #is_diagnosed_with
-        rr:objectMap [
-            rr:parentTriplesMap map:neoplasm;
-            rr:joinCondition [
-                rr:child "id";
-                rr:parent "id";
-            ];
-        ];
+    # ];                                                            
+    # rr:predicateObjectMap [
+    #     rr:predicate roo:P100029; #is_diagnosed_with
+    #     rr:objectMap [
+    #         rr:parentTriplesMap map:neoplasm;
+    #         rr:joinCondition [
+    #             rr:child "id";
+    #             rr:parent "id";
+    #         ];
+    #     ];
     ]. 
 
 map:patient rr:predicateObjectMap [
