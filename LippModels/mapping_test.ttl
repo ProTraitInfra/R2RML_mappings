@@ -93,8 +93,8 @@ map:toxicityTimepoint a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:xero;
             rr:joinCondition [
-                rr:child "id";
-                rr:parent "id";
+                rr:child "hn_tox_timepoint";
+                rr:parent "hn_tox_timepoint";
             ];        
         ];
     ];
@@ -103,8 +103,8 @@ map:toxicityTimepoint a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:dysph;
             rr:joinCondition [
-                rr:child "id";
-                rr:parent "id";
+                rr:child "hn_tox_timepoint";
+                rr:parent "hn_tox_timepoint";
             ];
         ];    
     ].     
@@ -142,8 +142,8 @@ map:patient rr:predicateObjectMap [
         rr:objectMap [
             rr:parentTriplesMap map:toxicityTimepoint;
             rr:joinCondition [
-                rr:child "id";
-                rr:parent "id";
+                rr:child "hn_tox_timepoint";
+                rr:parent "hn_tox_timepoint";
             ];
         ];
     ].
