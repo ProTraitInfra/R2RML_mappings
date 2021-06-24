@@ -143,8 +143,8 @@ map:patient rr:predicateObjectMap [
         rr:objectMap [
             rr:parentTriplesMap map:toxicityTimepoint;
             rr:joinCondition [
-                rr:child "id";
-                rr:parent "id";
+                rr:child "hn_tox_id";
+                rr:parent "hn_tox_id";
             ];
         ];
     ].
