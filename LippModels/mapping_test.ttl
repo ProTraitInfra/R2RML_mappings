@@ -69,6 +69,7 @@ map:headNeckToxQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
     gen_idnumber as id, 
     hn_tox_xerostomia,
+    hn_tox_id,
     hn_tox_dysph,
     hn_tox_timepoint
         FROM hn_tox;""";
@@ -93,8 +94,8 @@ map:toxicityTimepoint a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:xero;
             rr:joinCondition [
-                rr:child "hn_tox_timepoint";
-                rr:parent "hn_tox_timepoint";
+                rr:child "hn_tox_id";
+                rr:parent "hn_tox_id";
             ];        
         ];
     ];
@@ -103,8 +104,8 @@ map:toxicityTimepoint a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:dysph;
             rr:joinCondition [
-                rr:child "hn_tox_timepoint";
-                rr:parent "hn_tox_timepoint";
+                rr:child "hn_tox_id";
+                rr:parent "hn_tox_id";
             ];
         ];    
     ].     
@@ -142,8 +143,8 @@ map:patient rr:predicateObjectMap [
         rr:objectMap [
             rr:parentTriplesMap map:toxicityTimepoint;
             rr:joinCondition [
-                rr:child "hn_tox_timepoint";
-                rr:parent "hn_tox_timepoint";
+                rr:child "id";
+                rr:parent "id";
             ];
         ];
     ].
@@ -151,7 +152,7 @@ map:patient rr:predicateObjectMap [
 
 
 ###########################################
-# Add planning comparison 
+# Add dvh variables 
 ###########################################
 map:dvhQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
