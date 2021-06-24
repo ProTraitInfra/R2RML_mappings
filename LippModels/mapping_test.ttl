@@ -68,7 +68,6 @@ map:patient rr:predicateObjectMap [
 map:headNeckToxQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
     gen_idnumber as id, 
-    hn_tox_id,
     hn_tox_xerostomia, 
     hn_tox_dysph,
     hn_tox_timepoint
@@ -76,18 +75,11 @@ map:headNeckToxQuery a rr:LogicalTable;
     rdfs:label "";
     skos:definition "".
 
-map:toxID a rr:TriplesMap;
+map:toxicity a rr:TriplesMap;
     rr:logicalTable map:headNeckToxQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/tox/{hn_tox_id}";
-        rr:class roo:toxID;  #placeholder
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_value;
-        rr:objectMap [
-            rr:column "hn_tox_id"; 
-            rr:datatype xsd:string;
-        ];
+        rr:template "patient/{id}/tox/";
+        rr:class roo:toxicity;  #placeholder
     ];
     rr:predicateObjectMap [
         rr:predicate roo:has_timepoint; #new roo predicate
@@ -97,6 +89,20 @@ map:toxID a rr:TriplesMap;
                 rr:child "id";
                 rr:parent "id";
             ];        
+        ];
+    ].
+
+map:timepoint a rr:TriplesMap;
+    rr:logicalTable map:headNeckToxQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/tox//hn_tox_timepoint/{hn_tox_timepoint}";
+        rr:class ncit:C25646; #registration
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hn_tox_timepoint"; 
+            rr:datatype xsd:string;
         ];
     ];
     rr:predicateObjectMap [
@@ -117,27 +123,13 @@ map:toxID a rr:TriplesMap;
                 rr:child "id";
                 rr:parent "id";
             ];
-        ];
-    ].
-
-map:timepoint a rr:TriplesMap;
-    rr:logicalTable map:headNeckToxQuery;
-    rr:subjectMap [
-        rr:template "patient/{id}/tox/{hn_tox_id}/hn_tox_timepoint/{hn_tox_timepoint}";
-        rr:class ncit:C25646; #registration
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042; #has_value
-        rr:objectMap [
-            rr:column "hn_tox_timepoint"; 
-            rr:datatype xsd:string;
-        ];
+        ];    
     ].     
 
 map:xero a rr:TriplesMap;
     rr:logicalTable map:headNeckToxQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/tox/{hn_tox_id}/hn_tox_xerostomia/{hn_tox_xerostomia}";
+        rr:template "patient/{id}/tox/{hn_tox_timepoint}/hn_tox_xerostomia/{hn_tox_xerostomia}";
         rr:class roo:xero; #clinics and hospitals 
     ];
     rr:predicateObjectMap [
@@ -151,7 +143,7 @@ map:xero a rr:TriplesMap;
 map:dysph a rr:TriplesMap;
     rr:logicalTable map:headNeckToxQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/tox/{hn_tox_id}/hn_tox_dysph/{hn_tox_dysph}";
+        rr:template "patient/{id}/tox/{hn_tox_timepoint}/hn_tox_dysph/{hn_tox_dysph}";
         rr:class roo:dysph;  
     ];
     rr:predicateObjectMap [
@@ -163,9 +155,9 @@ map:dysph a rr:TriplesMap;
     ].
 
 map:patient rr:predicateObjectMap [
-        rr:predicate roo:has_toxID; #is_treated_in
+        rr:predicate roo:has_toxicity; #is_treated_in
         rr:objectMap [
-            rr:parentTriplesMap map:toxID;
+            rr:parentTriplesMap map:toxicity;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
