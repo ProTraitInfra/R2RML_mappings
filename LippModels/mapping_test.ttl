@@ -68,7 +68,7 @@ map:patient rr:predicateObjectMap [
 map:headNeckToxQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
     gen_idnumber as id, 
-    hn_tox_xerostomia, 
+    hn_tox_xerostomia,
     hn_tox_dysph,
     hn_tox_timepoint
         FROM hn_tox;""";
@@ -93,8 +93,8 @@ map:toxicityTimepoint a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:xero;
             rr:joinCondition [
-                rr:child "hn_tox_timepoint";
-                rr:parent "hn_tox_timepoint";
+                rr:child "id";
+                rr:parent "id";
             ];        
         ];
     ];
@@ -103,8 +103,8 @@ map:toxicityTimepoint a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:dysph;
             rr:joinCondition [
-                rr:child "hn_tox_timepoint";
-                rr:parent "hn_tox_timepoint";
+                rr:child "id";
+                rr:parent "id";
             ];
         ];    
     ].     
