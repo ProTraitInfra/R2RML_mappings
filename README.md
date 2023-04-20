@@ -1,4 +1,4 @@
-# R2RML mappings repository
+# R2RML development repository
 
 This repository contains the R2RML mapping files created specifically for the proTRAIT postgres staging database. 
 
