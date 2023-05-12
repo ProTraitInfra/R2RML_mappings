@@ -20,7 +20,7 @@
 map:patientQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
     GEN_IDNUMBER as id 
-        FROM hn_data;""";
+        FROM hn_data""";
     rdfs:label "";
     skos:definition "".
 
@@ -65,14 +65,14 @@ map:patient rr:predicateObjectMap [
 map:radiationInducedSideEffectsQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
     GEN_IDNUMBER as id, 
-    HN_TOX_DATE_CONSULT as dateConsultation,
+    HN_DATA_ENTRY_DT as dateConsultation,
     HN_TOX_WEIGHT as weight,
     HN_TOX_XEROSTOMIA as xerostomia,
     HN_TOX_DYSPH as dysphagia,
     HN_TOX_DYSPH_UMCG as dysphagiaUMCG,
     HN_TOX_MUCOSITIS as oralMucositis,
     HN_TOX_DERMATITIS as dermatitisRadiation
-        FROM hn_data;""";
+        FROM hn_data""";
     rdfs:label "";
     skos:definition "".
 
@@ -297,7 +297,7 @@ map:radiotherapyQuery a rr:LogicalTable;
     HN_LD_TRT_TOTDOSE as treatedPlanTotalDose,
     HN_LD_TRT_FRACT as treatedPlanFractions,
     HN_LD_TRT_TECHN as treatedPlanTechnique
-        FROM hn_data;""";
+        FROM hn_data""";
     rdfs:label "";
     skos:definition "".
 
@@ -626,7 +626,7 @@ map:cancerTreatmentQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
     GEN_IDNUMBER as id, 
     HN_PT_CLIN_TRIAL as partOfClinicalTrial 
-        FROM hn_data;""";
+        FROM hn_data""";
     rdfs:label "";
     skos:definition "".
 
@@ -696,7 +696,7 @@ map:systemicTreatmentQuery a rr:LogicalTable;
     HN_SYSTTR_START_CONCURADJUV_A as adjuvantSystemicTreatmentStartDate,
     HN_SYSTTR_STOP_CONCURADJUV_A as adjuvantSystemicTreatmentStopDate,
     HN_SYSTTR_DOSE_RED_CONCURADJUV_A as adjuvantSystemicTreatmentDoseReduc
-        FROM hn_data;""";
+        FROM hn_data""";
     rdfs:label "";
     skos:definition "".
 

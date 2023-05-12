@@ -13,8 +13,6 @@
 @prefix skos: <http://www.w3.org/2008/05/skos#>.
 @prefix uo: <http://purl.obolibrary.org/obo/UO_>.
 @prefix time: <http://www.w3.org/2006/time#>.
-
-
  
 ###########################################
 # Add patient 
@@ -22,7 +20,7 @@
 map:patientQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
     GEN_IDNUMBER as id 
-        FROM hn_data;""";
+        FROM hn_data""";
     rdfs:label "";
     skos:definition "".
 
@@ -67,14 +65,14 @@ map:patient rr:predicateObjectMap [
 map:radiationInducedSideEffectsQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT 
     GEN_IDNUMBER as id, 
-    HN_TOX_DATE_CONSULT as dateConsultation,
+    HN_DATA_ENTRY_DT as dateConsultation,
     HN_TOX_WEIGHT as weight,
     HN_TOX_XEROSTOMIA as xerostomia,
     HN_TOX_DYSPH as dysphagia,
     HN_TOX_DYSPH_UMCG as dysphagiaUMCG,
     HN_TOX_MUCOSITIS as oralMucositis,
     HN_TOX_DERMATITIS as dermatitisRadiation
-        FROM hn_data;""";
+        FROM hn_data""";
     rdfs:label "";
     skos:definition "".
 
@@ -289,7 +287,7 @@ map:radiotherapyQuery a rr:LogicalTable;
     GEN_IDNUMBER as id, 
     HN_TOX_DOSE_SO_FAR as doseSoFar,
     HN_TIMEPOINT as timepoint
-        FROM hn_data;""";
+        FROM hn_data""";
     rdfs:label "";
     skos:definition "".
 
@@ -348,7 +346,13 @@ map:timePoint a rr:TriplesMap;
         ];
     ].
 
-map:cancerTreatment rr:predicateObjectMap [
+map:cancerTreatment a rr:TriplesMap;
+    rr:logicalTable map:radiotherapyQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy";
+        rr:class roo:cancerTreatment; #new roo class
+    ];
+    rr:predicateObjectMap [
         rr:predicate roo:P100024; #has_procedure
         rr:objectMap [
             rr:parentTriplesMap map:radiotherapy;
